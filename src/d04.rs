@@ -3,8 +3,9 @@ use serde::Deserialize;
 use std::{
     cmp::{max, min},
     error::Error,
-    process,
 };
+
+use crate::utils;
 
 #[derive(Debug, Deserialize, Recap)]
 #[recap(
@@ -18,7 +19,7 @@ struct Input {
 }
 
 pub fn solution1() -> Result<usize, Box<dyn Error>> {
-    let lines = std::io::stdin().lines().collect::<Result<Vec<_>, _>>()?;
+    let lines = utils::parse_lines()?;
     let mut total: usize = 0;
 
     for ln in lines {
@@ -35,7 +36,7 @@ pub fn solution1() -> Result<usize, Box<dyn Error>> {
 }
 
 pub fn solution2() -> Result<usize, Box<dyn Error>> {
-    let lines = std::io::stdin().lines().collect::<Result<Vec<_>, _>>()?;
+    let lines = utils::parse_lines()?;
     let mut total: usize = 0;
 
     for ln in lines {

@@ -1,11 +1,8 @@
+use crate::utils;
 use std::error::Error;
 
-// ABC 123
-// XYZ 036
-// A < B, B < C, C < A
-
 pub fn solution1() -> Result<usize, Box<dyn Error>> {
-    let lines = std::io::stdin().lines().collect::<Result<Vec<_>, _>>()?;
+    let lines = utils::parse_lines()?;
 
     Ok(lines.iter().map(|ln| compute_score(ln)).sum())
 }
@@ -23,12 +20,8 @@ pub fn compute_score(ln: &str) -> usize {
     }
 }
 
-// ABC opp R/P/C
-// XYZ L/D/W
-// A < B, B < C, C < A
-
 pub fn solution2() -> Result<usize, Box<dyn Error>> {
-    let lines = std::io::stdin().lines().collect::<Result<Vec<_>, _>>()?;
+    let lines = utils::parse_lines()?;
 
     Ok(lines.iter().map(|ln| compute_score_2(ln)).sum())
 }

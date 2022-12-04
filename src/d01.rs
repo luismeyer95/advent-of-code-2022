@@ -1,8 +1,10 @@
 use std::collections::BinaryHeap;
 use std::error::Error;
 
+use crate::utils;
+
 pub fn solution1() -> Result<usize, Box<dyn Error>> {
-    let lines = std::io::stdin().lines().collect::<Result<Vec<_>, _>>()?;
+    let lines = utils::parse_lines()?;
     let max = lines
         .split(|s| s.is_empty())
         .map(|slice| slice.iter().map(|ln| ln.parse::<usize>().unwrap()).sum())
@@ -12,7 +14,7 @@ pub fn solution1() -> Result<usize, Box<dyn Error>> {
 }
 
 pub fn solution2() -> Result<isize, Box<dyn Error>> {
-    let lines = std::io::stdin().lines().collect::<Result<Vec<_>, _>>()?;
+    let lines = utils::parse_lines()?;
     let calories_per_elve = lines.split(|s| s.is_empty()).map(|slice| {
         slice
             .iter()

@@ -1,7 +1,8 @@
+use crate::utils;
 use std::{collections::HashSet, error::Error};
 
 pub fn solution1() -> Result<usize, Box<dyn Error>> {
-    let lines = std::io::stdin().lines().collect::<Result<Vec<_>, _>>()?;
+    let lines = utils::parse_lines()?;
     let mut sum = 0;
 
     for ln in lines {
@@ -15,7 +16,7 @@ pub fn solution1() -> Result<usize, Box<dyn Error>> {
 }
 
 pub fn solution() -> Result<usize, Box<dyn Error>> {
-    let lines = std::io::stdin().lines().collect::<Result<Vec<_>, _>>()?;
+    let lines = utils::parse_lines()?;
 
     let priorities = lines.chunks(3).map(|lns| {
         let chr = lns
