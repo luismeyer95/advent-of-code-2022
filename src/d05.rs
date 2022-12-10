@@ -12,11 +12,35 @@ pub struct MoveInstruction {
 }
 
 pub fn solution1() -> Result<String, Box<dyn Error>> {
-    solution(execute_moves_s01)
+    solution(|moves, stacks| {
+        for MoveInstruction {
+            amount,
+            source,
+            destination,
+        } in moves
+        {
+            for _ in 0..amount {
+                if let Some(popped) = stacks[source].pop_back() {
+                    stacks[destination].push_back(popped);
+                }
+            }
+        }
+    })
 }
 
 pub fn solution2() -> Result<String, Box<dyn Error>> {
-    solution(execute_moves_s02)
+    solution(|moves, stacks| {
+        for MoveInstruction {
+            amount,
+            source,
+            destination,
+        } in moves
+        {
+            let src = &mut stacks[source];
+            let slice: Vec<char> = src.drain((src.len() - amount)..).collect();
+            stacks[destination].extend(slice);
+        }
+    })
 }
 
 pub fn solution(
@@ -70,32 +94,4 @@ pub fn parse_moves(lines: impl IntoIterator<Item = impl AsRef<str>>) -> Vec<Move
         .into_iter()
         .filter_map(|ln| ln.as_ref().parse::<MoveInstruction>().ok())
         .collect()
-}
-
-pub fn execute_moves_s01(moves: Vec<MoveInstruction>, stacks: &mut [VecDeque<char>]) {
-    for MoveInstruction {
-        amount,
-        source,
-        destination,
-    } in moves
-    {
-        for _ in 0..amount {
-            if let Some(popped) = stacks[source].pop_back() {
-                stacks[destination].push_back(popped);
-            }
-        }
-    }
-}
-
-pub fn execute_moves_s02(moves: Vec<MoveInstruction>, stacks: &mut [VecDeque<char>]) {
-    for MoveInstruction {
-        amount,
-        source,
-        destination,
-    } in moves
-    {
-        let src = &mut stacks[source];
-        let slice: Vec<char> = src.drain((src.len() - amount)..).collect();
-        stacks[destination].extend(slice);
-    }
 }
