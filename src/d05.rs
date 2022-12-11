@@ -47,7 +47,6 @@ pub fn solution(
     move_executor: impl Fn(Vec<MoveInstruction>, &mut [VecDeque<char>]),
 ) -> Result<String, Box<dyn Error>> {
     let input = utils::parse_lines()?;
-
     let mut lines = input
         .split(|ln| ln.is_empty() || ln.chars().next().is_some_and(|c| c.is_whitespace()))
         .filter(|slice| !slice.is_empty());
